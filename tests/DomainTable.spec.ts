@@ -54,5 +54,27 @@ describe('DomainTable', () => {
     expect(emitted).toBeTruthy()
     expect(emitted?.[0]?.[0]).toMatchObject({ domain: 'example.com' })
   })
+
+  it('emits select on Enter key', async () => {
+    const wrapper = mount(DomainTable, {
+      props: { domains: sampleDomains, selectedDomain: null },
+    })
+    const firstRow = wrapper.find('tbody tr')
+    await firstRow.trigger('keydown.enter')
+    const emitted = wrapper.emitted('select')
+    expect(emitted).toBeTruthy()
+    expect(emitted?.[0]?.[0]).toMatchObject({ domain: 'example.com' })
+  })
+
+  it('emits select on Space key', async () => {
+    const wrapper = mount(DomainTable, {
+      props: { domains: sampleDomains, selectedDomain: null },
+    })
+    const firstRow = wrapper.find('tbody tr')
+    await firstRow.trigger('keydown.space')
+    const emitted = wrapper.emitted('select')
+    expect(emitted).toBeTruthy()
+    expect(emitted?.[0]?.[0]).toMatchObject({ domain: 'example.com' })
+  })
 })
 
