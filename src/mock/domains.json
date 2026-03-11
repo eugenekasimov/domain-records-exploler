@@ -1,0 +1,272 @@
+[
+  {
+    "domain": "example.com",
+    "registrar": "Acme Registrar",
+    "status": "active",
+    "created_at": "2010-01-15T10:00:00Z",
+    "expires_at": "2030-01-15T10:00:00Z",
+    "nameservers": ["ns1.example.com", "ns2.example.com"],
+    "updated_at": "2024-10-01T12:34:56Z"
+  },
+  {
+    "domain": "hold-domain.net",
+    "registrar": "Global Domains",
+    "status": "clientHold",
+    "created_at": "2018-03-10T08:00:00Z",
+    "expires_at": "2026-03-10T08:00:00Z",
+    "nameservers": ["ns1.hold-domain.net"],
+    "updated_at": "2025-12-01T09:00:00Z"
+  },
+  {
+    "domain": "pending-transfer.org",
+    "registrar": "Acme Registrar",
+    "status": "pendingTransfer",
+    "created_at": "2015-06-20T14:30:00Z",
+    "expires_at": "2025-06-20T14:30:00Z",
+    "nameservers": ["ns1.pending-transfer.org", "ns2.pending-transfer.org"],
+    "updated_at": "2026-01-05T16:45:00Z"
+  },
+  {
+    "domain": "no-nameservers.io",
+    "registrar": "Minimal Domains",
+    "status": "active",
+    "created_at": "2022-02-02T02:02:02Z",
+    "expires_at": "2027-02-02T02:02:02Z",
+    "nameservers": [],
+    "updated_at": "2025-10-10T10:10:10Z"
+  },
+  {
+    "domain": "missing-data.xyz",
+    "registrar": null,
+    "status": "clientHold",
+    "created_at": null,
+    "expires_at": null,
+    "nameservers": null,
+    "updated_at": null
+  },
+  {
+    "domain": "another-example.dev",
+    "registrar": "Global Domains",
+    "status": "active",
+    "created_at": "2019-11-11T11:11:11Z",
+    "expires_at": "2029-11-11T11:11:11Z",
+    "nameservers": ["ns1.another-example.dev", "ns2.another-example.dev"],
+    "updated_at": "2025-08-20T12:00:00Z"
+  },
+  {
+    "domain": "short-expiry.app",
+    "registrar": "Fast Registrar",
+    "status": "active",
+    "created_at": "2024-01-01T00:00:00Z",
+    "expires_at": "2025-01-01T00:00:00Z",
+    "nameservers": ["ns1.short-expiry.app"],
+    "updated_at": "2025-12-31T23:59:59Z"
+  },
+  {
+    "domain": "legacy-domain.co",
+    "registrar": "Legacy Registrar",
+    "status": "active",
+    "created_at": "2005-05-05T05:05:05Z",
+    "expires_at": "2030-05-05T05:05:05Z",
+    "nameservers": [
+      "ns1.legacy-domain.co",
+      "ns2.legacy-domain.co",
+      "ns3.legacy-domain.co"
+    ],
+    "updated_at": "2024-09-15T18:20:00Z"
+  },
+  {
+    "domain": "transfer-in-progress.me",
+    "registrar": "New Age Domains",
+    "status": "pendingTransfer",
+    "created_at": "2021-07-07T07:07:07Z",
+    "expires_at": "2026-07-07T07:07:07Z",
+    "nameservers": ["ns1.transfer-in-progress.me"],
+    "updated_at": "2026-02-28T10:30:00Z"
+  },
+  {
+    "domain": "internal-tool.test",
+    "registrar": "Acme Registrar",
+    "status": "active",
+    "created_at": "2023-09-01T09:00:00Z",
+    "expires_at": "2028-09-01T09:00:00Z",
+    "nameservers": ["ns1.internal-tool.test"],
+    "updated_at": "2026-03-01T12:00:00Z"
+  },
+  {
+    "domain": "support-portal.tld",
+    "registrar": "Acme Registrar",
+    "status": "active",
+    "created_at": "2017-04-12T10:15:00Z",
+    "expires_at": "2027-04-12T10:15:00Z",
+    "nameservers": ["ns1.support-portal.tld", "ns2.support-portal.tld"],
+    "updated_at": "2025-11-01T09:00:00Z"
+  },
+  {
+    "domain": "expired-soon.info",
+    "registrar": "Global Domains",
+    "status": "clientHold",
+    "created_at": "2020-01-01T00:00:00Z",
+    "expires_at": "2025-03-15T00:00:00Z",
+    "nameservers": ["ns1.expired-soon.info"],
+    "updated_at": "2026-02-10T11:30:00Z"
+  },
+  {
+    "domain": "locked-domain.biz",
+    "registrar": "Secure Registrar",
+    "status": "clientHold",
+    "created_at": "2016-08-19T13:45:00Z",
+    "expires_at": "2026-08-19T13:45:00Z",
+    "nameservers": ["ns1.locked-domain.biz", "ns2.locked-domain.biz"],
+    "updated_at": "2025-12-20T07:20:00Z"
+  },
+  {
+    "domain": "bulk-transfer.cc",
+    "registrar": "Bulk Domains Inc",
+    "status": "pendingTransfer",
+    "created_at": "2013-12-01T05:00:00Z",
+    "expires_at": "2028-12-01T05:00:00Z",
+    "nameservers": ["ns1.bulk-transfer.cc", "ns2.bulk-transfer.cc"],
+    "updated_at": "2026-01-20T15:10:00Z"
+  },
+  {
+    "domain": "example-shop.store",
+    "registrar": "Fast Registrar",
+    "status": "active",
+    "created_at": "2022-05-05T09:30:00Z",
+    "expires_at": "2027-05-05T09:30:00Z",
+    "nameservers": ["ns1.example-shop.store", "ns2.example-shop.store"],
+    "updated_at": "2025-10-05T08:00:00Z"
+  },
+  {
+    "domain": "promo-landing.page",
+    "registrar": "Acme Registrar",
+    "status": "active",
+    "created_at": "2023-11-23T12:00:00Z",
+    "expires_at": "2026-11-23T12:00:00Z",
+    "nameservers": [],
+    "updated_at": "2025-12-24T16:45:00Z"
+  },
+  {
+    "domain": "idn-example.xn--p1ai",
+    "registrar": "International Domains",
+    "status": "active",
+    "created_at": "2019-02-14T18:00:00Z",
+    "expires_at": "2029-02-14T18:00:00Z",
+    "nameservers": ["ns1.idn-example.xn--p1ai"],
+    "updated_at": "2024-06-01T06:30:00Z"
+  },
+  {
+    "domain": "regional-eu.eu",
+    "registrar": "EU Domains",
+    "status": "active",
+    "created_at": "2014-09-09T09:09:09Z",
+    "expires_at": "2029-09-09T09:09:09Z",
+    "nameservers": ["ns1.regional-eu.eu", "ns2.regional-eu.eu"],
+    "updated_at": "2025-09-09T09:09:09Z"
+  },
+  {
+    "domain": "staging-environment.dev",
+    "registrar": "Internal Registrar",
+    "status": "clientHold",
+    "created_at": "2021-03-03T03:03:03Z",
+    "expires_at": "2026-03-03T03:03:03Z",
+    "nameservers": null,
+    "updated_at": "2025-11-11T11:11:11Z"
+  },
+  {
+    "domain": "multi-ns-domain.net",
+    "registrar": "Global Domains",
+    "status": "active",
+    "created_at": "2018-10-01T00:00:00Z",
+    "expires_at": "2028-10-01T00:00:00Z",
+    "nameservers": [
+      "ns1.multi-ns-domain.net",
+      "ns2.multi-ns-domain.net",
+      "ns3.multi-ns-domain.net",
+      "ns4.multi-ns-domain.net"
+    ],
+    "updated_at": "2026-01-01T01:00:00Z"
+  },
+  {
+    "domain": "low-touch-customer.com",
+    "registrar": "Minimal Domains",
+    "status": "active",
+    "created_at": "2012-06-30T22:10:00Z",
+    "expires_at": "2032-06-30T22:10:00Z",
+    "nameservers": ["ns1.low-touch-customer.com"],
+    "updated_at": "2025-07-15T14:22:00Z"
+  },
+  {
+    "domain": "api-endpoint.example",
+    "registrar": "Acme Registrar",
+    "status": "pendingTransfer",
+    "created_at": "2020-10-10T10:10:10Z",
+    "expires_at": "2025-10-10T10:10:10Z",
+    "nameservers": ["ns1.api-endpoint.example"],
+    "updated_at": "2026-03-02T12:15:00Z"
+  },
+  {
+    "domain": "internal-metrics.tools",
+    "registrar": null,
+    "status": "active",
+    "created_at": null,
+    "expires_at": "2029-01-01T00:00:00Z",
+    "nameservers": ["ns1.internal-metrics.tools"],
+    "updated_at": null
+  },
+  {
+    "domain": "dark-mode-demo.site",
+    "registrar": "Fast Registrar",
+    "status": "active",
+    "created_at": "2024-09-15T08:30:00Z",
+    "expires_at": "2026-09-15T08:30:00Z",
+    "nameservers": ["ns1.dark-mode-demo.site"],
+    "updated_at": "2025-12-05T10:00:00Z"
+  },
+  {
+    "domain": "migration-test.one",
+    "registrar": "Bulk Domains Inc",
+    "status": "pendingTransfer",
+    "created_at": "2011-01-20T05:00:00Z",
+    "expires_at": "2026-01-20T05:00:00Z",
+    "nameservers": [],
+    "updated_at": "2026-02-01T12:00:00Z"
+  },
+  {
+    "domain": "whois-lookup.demo",
+    "registrar": "Acme Registrar",
+    "status": "active",
+    "created_at": "2019-07-04T14:00:00Z",
+    "expires_at": "2029-07-04T14:00:00Z",
+    "nameservers": ["ns1.whois-lookup.demo", "ns2.whois-lookup.demo"],
+    "updated_at": "2025-04-01T08:00:00Z"
+  },
+  {
+    "domain": "parking-page.example",
+    "registrar": "Legacy Registrar",
+    "status": "clientHold",
+    "created_at": "2009-09-09T09:09:09Z",
+    "expires_at": "2029-09-09T09:09:09Z",
+    "nameservers": ["ns1.parking-page.example"],
+    "updated_at": "2024-03-03T03:03:03Z"
+  },
+  {
+    "domain": "edge-case-null-ns.test",
+    "registrar": "Test Registrar",
+    "status": "active",
+    "created_at": "2023-01-01T00:00:00Z",
+    "expires_at": null,
+    "nameservers": null,
+    "updated_at": "2025-05-01T11:11:11Z"
+  },
+  {
+    "domain": "ccTLD-example.ca",
+    "registrar": "Canadian Domains",
+    "status": "active",
+    "created_at": "2016-02-29T12:00:00Z",
+    "expires_at": "2028-02-29T12:00:00Z",
+    "nameservers": ["ns1.cctld-example.ca", "ns2.cctld-example.ca"],
+    "updated_at": "2025-02-28T12:00:00Z"
+  }
+]
