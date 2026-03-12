@@ -39,7 +39,7 @@ const handleRowSelect = (domain: DomainRecord) => {
 };
 
 const handleStatusFilterChange = (status: DomainStatus | "") => {
-  filters.value = { ...filters.value, status };
+  filters.value.status = status;
 };
 
 const handleReset = () => {
@@ -113,7 +113,7 @@ watch(
 
           <div v-else-if="error" class="state-message state-error" role="alert">
             <p>{{ error }}</p>
-            <button type="button" class="secondary-button" @click="reload">
+            <button type="button" class="secondary-button button-pill" @click="reload">
               Retry
             </button>
           </div>
@@ -138,7 +138,7 @@ watch(
           >
             <button
               type="button"
-              class="pagination-button"
+              class="pagination-button button-pill"
               :disabled="page === 1"
               @click="goToPreviousPage"
             >
@@ -149,7 +149,7 @@ watch(
             </span>
             <button
               type="button"
-              class="pagination-button"
+              class="pagination-button button-pill"
               :disabled="page === totalPages"
               @click="goToNextPage"
             >
@@ -174,8 +174,8 @@ watch(
 <style scoped>
 .app {
   min-height: 100vh;
-  background-color: #f3f4f6;
-  color: #111827;
+  background-color: var(--color-bg-app);
+  color: var(--color-text-primary);
 }
 
 .app-header {
@@ -185,8 +185,8 @@ watch(
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .app-title {
@@ -211,9 +211,9 @@ watch(
 }
 
 .panel {
-  background-color: #ffffff;
+  background-color: var(--color-bg-surface);
   border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-border-subtle);
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
   overflow: hidden;
   display: flex;
@@ -247,13 +247,13 @@ watch(
   font-size: 0.95rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .panel-meta {
   margin: 0;
   font-size: 0.8rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .panel-body {
@@ -277,32 +277,12 @@ watch(
 
 .pagination-info {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .pagination-button {
-  border-radius: 999px;
-  border: 1px solid #d1d5db;
   padding: 0.25rem 0.85rem;
   font-size: 0.85rem;
-  font-family: inherit;
-  background: #ffffff;
-  color: #111827;
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.pagination-button:hover:not(:disabled) {
-  background-color: #f3f4f6;
-  border-color: #9ca3af;
-}
-
-.pagination-button:disabled {
-  cursor: default;
-  opacity: 0.5;
 }
 
 .loading-overlay {
@@ -312,7 +292,7 @@ watch(
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .spinner {
@@ -342,35 +322,19 @@ watch(
 }
 
 .state-empty {
-  background-color: #f9fafb;
-  border: 1px dashed #d1d5db;
-  color: #111827;
+  background-color: var(--color-bg-subtle);
+  border: 1px dashed var(--color-border-default);
+  color: var(--color-text-primary);
 }
 
 .state-hint {
   margin-top: 0.35rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .secondary-button {
-  border-radius: 999px;
-  border: 1px solid #d1d5db;
   padding: 0.4rem 1rem;
   font-size: 0.85rem;
-  font-family: inherit;
-  background: #ffffff;
-  color: #111827;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.secondary-button:hover {
-  background-color: #f3f4f6;
-  border-color: #9ca3af;
 }
 
 @keyframes spin {

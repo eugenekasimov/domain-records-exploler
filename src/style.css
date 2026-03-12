@@ -1,14 +1,44 @@
 :root {
+  /* Typography & base */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light;
-  color: #111827;
-  background-color: #f3f4f6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Color tokens */
+  --color-bg-app: #f3f4f6;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f9fafb;
+
+  --color-text-primary: #111827;
+  --color-text-muted: #6b7280;
+
+  --color-border-subtle: #e5e7eb;
+  --color-border-default: #d1d5db;
+
+  --color-accent: #6362e6;
+  --color-accent-strong: #005fbb;
+
+  --color-input-placeholder: #9ca3af;
+
+  /* Status colors */
+  --status-active-bg: #ecfdf3;
+  --status-active-fg: #166534;
+  --status-active-dot: #16a34a;
+
+  --status-hold-bg: #fffbeb;
+  --status-hold-fg: #92400e;
+  --status-hold-dot: #eab308;
+
+  --status-pending-bg: #eff6ff;
+  --status-pending-fg: #1d4ed8;
+  --status-pending-dot: #3b82f6;
+
+  --color-chip-bg: #f9fafb;
 }
 
 *,
@@ -21,11 +51,12 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f3f4f6;
+  background-color: var(--color-bg-app);
+  color: var(--color-text-primary);
 }
 
 a {
-  color: #005fbb;
+  color: var(--color-accent-strong);
   text-decoration: none;
 }
 
@@ -35,6 +66,31 @@ a:hover {
 
 button {
   font-family: inherit;
+}
+
+/* Reusable pill button pattern */
+.button-pill {
+  border-radius: 999px;
+  border: 1px solid var(--color-border-default);
+  font-family: inherit;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.button-pill:hover:not(:disabled) {
+  background-color: var(--color-bg-app);
+  border-color: var(--color-input-placeholder);
+}
+
+.button-pill:disabled {
+  cursor: default;
+  opacity: 0.5;
 }
 
 #app {

@@ -27,7 +27,7 @@ const emit = defineEmits<{
       </div>
       <button
         type="button"
-        class="details-close"
+        class="details-close button-pill"
         @click="emit('close')"
       >
         Clear selection
@@ -82,7 +82,7 @@ const emit = defineEmits<{
 <style scoped>
 .details-empty {
   padding: 1.2rem 0.25rem 0.3rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
   font-size: 0.9rem;
 }
 
@@ -119,7 +119,7 @@ const emit = defineEmits<{
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .details-domain {
@@ -129,25 +129,12 @@ const emit = defineEmits<{
 }
 
 .details-close {
-  border-radius: 999px;
-  border: 1px solid #d1d5db;
   padding: 0.25rem 0.8rem;
   font-size: 0.8rem;
-  font-family: inherit;
-  background: #ffffff;
-  color: #111827;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-
-.details-close:hover {
-  background-color: #f3f4f6;
-  border-color: #9ca3af;
 }
 
 .details-section {
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--color-border-subtle);
   padding-top: 0.7rem;
 }
 
@@ -156,7 +143,7 @@ const emit = defineEmits<{
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .details-grid {
@@ -168,7 +155,7 @@ const emit = defineEmits<{
 
 .details-field dt {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin-bottom: 0.15rem;
 }
 
@@ -189,8 +176,8 @@ const emit = defineEmits<{
   font-size: 0.9rem;
   padding: 0.25rem 0.4rem;
   border-radius: 0.4rem;
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background-color: var(--color-chip-bg);
+  border: 1px solid var(--color-border-subtle);
   word-break: break-all;
 }
 

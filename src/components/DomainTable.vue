@@ -34,7 +34,6 @@ const isSelected = (domain: DomainRecord) =>
           v-for="domain in domains"
           :key="domain.domain"
           :class="['row', { 'row-selected': isSelected(domain) }]"
-          role="button"
           :aria-selected="isSelected(domain)"
           tabindex="0"
           @click="emit('select', domain)"
@@ -80,15 +79,15 @@ thead {
   position: sticky;
   top: 0;
   z-index: 1;
-  background: #f9fafb;
+  background: var(--color-bg-subtle);
 }
 
 th {
   text-align: left;
   padding: 0.6rem 0.75rem;
   font-weight: 500;
-  color: #6b7280;
-  border-bottom: 1px solid #e5e7eb;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 tbody tr:last-child td {
@@ -104,11 +103,11 @@ tbody tr:last-child td {
 }
 
 .row:nth-child(even) {
-  background-color: #ffffff;
+  background-color: var(--color-bg-surface);
 }
 
 .row:nth-child(odd) {
-  background-color: #f9fafb;
+  background-color: var(--color-bg-subtle);
 }
 
 .row:hover {
@@ -119,7 +118,7 @@ tbody tr:last-child td {
 
 .row-selected {
   background-color: #e0e7ff;
-  box-shadow: inset 4px 0 0 #6362e6;
+  box-shadow: inset 4px 0 0 var(--color-accent);
 }
 
 .cell {
@@ -130,7 +129,7 @@ tbody tr:last-child td {
 
 .cell-main {
   font-weight: 500;
-  color: #111827;
+  color: var(--color-text-primary);
   white-space: normal; /* allow wrapping so .domain-name word-break: break-all can break long domains */
 }
 
@@ -139,7 +138,7 @@ tbody tr:last-child td {
 }
 
 .muted {
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 </style>

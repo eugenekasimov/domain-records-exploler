@@ -24,6 +24,9 @@ const emit = defineEmits<{
   reset: []
 }>()
 
+let domainDebounce: ReturnType<typeof setTimeout> | null = null
+let registrarDebounce: ReturnType<typeof setTimeout> | null = null
+
 const domainLocal = ref(props.domain)
 const registrarLocal = ref(props.registrar)
 
@@ -31,17 +34,22 @@ watch(
   () => props.domain,
   (v) => {
     domainLocal.value = v ?? ''
+    if (domainDebounce) {
+      clearTimeout(domainDebounce)
+      domainDebounce = null
+    }
   }
 )
 watch(
   () => props.registrar,
   (v) => {
     registrarLocal.value = v ?? ''
+    if (registrarDebounce) {
+      clearTimeout(registrarDebounce)
+      registrarDebounce = null
+    }
   }
 )
-
-let domainDebounce: ReturnType<typeof setTimeout> | null = null
-let registrarDebounce: ReturnType<typeof setTimeout> | null = null
 
 const onDomainInput = (value: string) => {
   domainLocal.value = value
@@ -120,7 +128,7 @@ onUnmounted(() => {
     </label>
 
     <div class="actions">
-      <button type="button" class="reset-button" @click="onResetClick">
+      <button type="button" class="reset-button button-pill" @click="onResetClick">
         Reset filters
       </button>
     </div>
@@ -144,15 +152,15 @@ onUnmounted(() => {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #9ca3af;
+  color: var(--color-input-placeholder);
 }
 
 .input {
   appearance: none;
   border-radius: 0.6rem;
-  border: 1px solid #d1d5db;
-  background-color: #ffffff;
-  color: #111827;
+  border: 1px solid var(--color-border-default);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
   padding: 0.55rem 0.75rem;
   font-size: 0.9rem;
   font-family: inherit;
@@ -161,13 +169,13 @@ onUnmounted(() => {
 }
 
 .input::placeholder {
-  color: #9ca3af;
+  color: var(--color-input-placeholder);
 }
 
 .input:focus-visible {
-  border-color: #6362e6;
-  box-shadow: 0 0 0 1px #6362e6;
-  background-color: #ffffff;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
+  background-color: var(--color-bg-surface);
 }
 
 .select {
@@ -181,24 +189,8 @@ onUnmounted(() => {
 }
 
 .reset-button {
-  border-radius: 999px;
-  border: 1px solid #d1d5db;
   padding: 0.35rem 0.9rem;
   font-size: 0.8rem;
-  font-family: inherit;
-  background: #ffffff;
-  color: #111827;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.reset-button:hover {
-  background-color: #f3f4f6;
-  border-color: #9ca3af;
 }
 </style>
 

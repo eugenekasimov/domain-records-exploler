@@ -23,7 +23,7 @@ export function useDomainRecords(initialFilters: DomainFilterParams = {}) {
       domains.value = response.data;
       total.value = response.total;
     } catch (e) {
-      console.error(e);
+      // TODO: send error details to a real observability system instead of relying on UI-only messaging
       error.value = "Failed to load domain records.";
       domains.value = [];
       total.value = 0;

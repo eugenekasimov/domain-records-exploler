@@ -45,30 +45,30 @@ const label = computed(() => {
 }
 
 .status-active {
-  background-color: #ecfdf3;
-  color: #166534;
+  background-color: var(--status-active-bg);
+  color: var(--status-active-fg);
 }
 
 .status-active .status-dot {
-  background-color: #16a34a;
+  background-color: var(--status-active-dot);
 }
 
 .status-clientHold {
-  background-color: #fffbeb;
-  color: #92400e;
+  background-color: var(--status-hold-bg);
+  color: var(--status-hold-fg);
 }
 
 .status-clientHold .status-dot {
-  background-color: #eab308;
+  background-color: var(--status-hold-dot);
 }
 
 .status-pendingTransfer {
-  background-color: #eff6ff;
-  color: #1d4ed8;
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-fg);
 }
 
 .status-pendingTransfer .status-dot {
-  background-color: #3b82f6;
+  background-color: var(--status-pending-dot);
 }
 </style>
 
