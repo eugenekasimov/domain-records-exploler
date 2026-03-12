@@ -34,7 +34,9 @@ const isSelected = (domain: DomainRecord) =>
           v-for="domain in domains"
           :key="domain.domain"
           :class="['row', { 'row-selected': isSelected(domain) }]"
-          :tabindex="0"
+          role="button"
+          :aria-selected="isSelected(domain)"
+          tabindex="0"
           @click="emit('select', domain)"
           @keydown.enter.prevent="emit('select', domain)"
           @keydown.space.prevent="emit('select', domain)"
@@ -129,6 +131,7 @@ tbody tr:last-child td {
 .cell-main {
   font-weight: 500;
   color: #111827;
+  white-space: normal; /* allow wrapping so .domain-name word-break: break-all can break long domains */
 }
 
 .domain-name {

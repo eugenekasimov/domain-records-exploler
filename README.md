@@ -77,8 +77,8 @@ npm test
 
 - **Filtering and pagination location**: The mock `fetchDomains` function applies filters and pagination in one place (simulating a real backend), but uses an in-memory JSON dataset for simplicity. This keeps the frontend focused on a clean API boundary while still being easy to run and test locally.
 - **Side panel vs modal / separate page**: A side panel allows support engineers to maintain context while browsing the table and switching between domains with minimal friction. A modal would cover too much of the table; a separate page would add extra navigation steps.
-- **Input debounce**: Filter changes are debounced in `useDomainRecords` so that typing in the domain/registrar fields does not fire a full reload on every keystroke. In a production setting this delay would be tuned (or complemented with server-side protections) based on real API performance.
-- **Minimal testing surface**: Tests are focused on the core data composable (`useDomainRecords`) and the main table component (`DomainTable`) as these are the most critical pieces for correctness. In a production system, we would add more integration and E2E coverage.
+- **Input debounce**: Only the domain and registrar text inputs are debounced (in `DomainFilters`), so typing does not trigger a reload on every keystroke. Reset and status changes trigger an immediate reload so button and dropdown actions feel instant.
+- **Testing**: The suite has 7 test files: the composable (`useDomainRecords`), `DomainTable`, `DomainFilters`, `DomainDetails`, `StatusBadge`, the API layer (`domainApi`), and date-format utilities (`format`). Coverage includes filters, pagination, reset, error and empty states, and keyboard/emit behavior. In a production system we would add integration and E2E coverage on top of this.
 - **Styling**: Plain CSS is used with a small number of utility classes tailored to this view, rather than a full design system, to keep the exercise concise.
 
 ---

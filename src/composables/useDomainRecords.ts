@@ -10,7 +10,6 @@ export function useDomainRecords(initialFilters: DomainFilterParams = {}) {
   const page = ref(1);
   const pageSize = ref(10);
   const total = ref(0);
-  let filterDebounceHandle: ReturnType<typeof setTimeout> | null = null;
 
   const load = async () => {
     isLoading.value = true;
@@ -37,21 +36,10 @@ export function useDomainRecords(initialFilters: DomainFilterParams = {}) {
     filters,
     () => {
       page.value = 1;
-      if (filterDebounceHandle) {
-        clearTimeout(filterDebounceHandle);
-      }
-      filterDebounceHandle = setTimeout(() => {
-        void load();
-      }, 400);
+      void load();
     },
     { deep: true },
   );
-
-  const setPage = (targetPage: number) => {
-    if (targetPage < 1) return;
-    page.value = targetPage;
-    void load();
-  };
 
   const goToPreviousPage = () => {
     if (page.value <= 1) return;
@@ -66,8 +54,8 @@ export function useDomainRecords(initialFilters: DomainFilterParams = {}) {
   };
 
   const resetFilters = () => {
-    // Let the filters watcher own page reset + reload to avoid double loads
     filters.value = {};
+    // Watcher runs and loads; no debounce so reset and status changes feel immediate
   };
 
   return {
@@ -79,7 +67,6 @@ export function useDomainRecords(initialFilters: DomainFilterParams = {}) {
     pageSize,
     total,
     reload: load,
-    setPage,
     goToPreviousPage,
     goToNextPage,
     resetFilters,

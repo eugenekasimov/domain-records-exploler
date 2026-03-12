@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
 import type { DomainStatus } from '../types/domain'
+
+const FILTER_DEBOUNCE_MS = 400
 
 const props = withDefaults(
   defineProps<{
@@ -22,15 +24,42 @@ const emit = defineEmits<{
   reset: []
 }>()
 
-const domainModel = computed({
-  get: () => props.domain,
-  set: (value: string) => emit('update:domain', value),
-})
+const domainLocal = ref(props.domain)
+const registrarLocal = ref(props.registrar)
 
-const registrarModel = computed({
-  get: () => props.registrar,
-  set: (value: string) => emit('update:registrar', value),
-})
+watch(
+  () => props.domain,
+  (v) => {
+    domainLocal.value = v ?? ''
+  }
+)
+watch(
+  () => props.registrar,
+  (v) => {
+    registrarLocal.value = v ?? ''
+  }
+)
+
+let domainDebounce: ReturnType<typeof setTimeout> | null = null
+let registrarDebounce: ReturnType<typeof setTimeout> | null = null
+
+const onDomainInput = (value: string) => {
+  domainLocal.value = value
+  if (domainDebounce) clearTimeout(domainDebounce)
+  domainDebounce = setTimeout(() => {
+    emit('update:domain', value)
+    domainDebounce = null
+  }, FILTER_DEBOUNCE_MS)
+}
+
+const onRegistrarInput = (value: string) => {
+  registrarLocal.value = value
+  if (registrarDebounce) clearTimeout(registrarDebounce)
+  registrarDebounce = setTimeout(() => {
+    emit('update:registrar', value)
+    registrarDebounce = null
+  }, FILTER_DEBOUNCE_MS)
+}
 
 const onStatusChange = (event: Event) => {
   const value = (event.target as HTMLSelectElement).value as DomainStatus | ''
@@ -38,9 +67,13 @@ const onStatusChange = (event: Event) => {
 }
 
 const onResetClick = () => {
-  // Emit reset only; parent clears filters in one shot (resetFilters()), so the watcher runs once and props flow back to clear inputs.
   emit('reset')
 }
+
+onUnmounted(() => {
+  if (domainDebounce) clearTimeout(domainDebounce)
+  if (registrarDebounce) clearTimeout(registrarDebounce)
+})
 </script>
 
 <template>
@@ -48,24 +81,26 @@ const onResetClick = () => {
     <label class="field">
       <span class="field-label">Domain</span>
       <input
-        v-model="domainModel"
+        :value="domainLocal"
         type="search"
         class="input"
         name="domain"
         placeholder="Search by domain name"
         autocomplete="off"
+        @input="onDomainInput(($event.target as HTMLInputElement).value)"
       />
     </label>
 
     <label class="field">
       <span class="field-label">Registrar</span>
       <input
-        v-model="registrarModel"
+        :value="registrarLocal"
         type="search"
         class="input"
         name="registrar"
         placeholder="Filter by registrar"
         autocomplete="off"
+        @input="onRegistrarInput(($event.target as HTMLInputElement).value)"
       />
     </label>
 

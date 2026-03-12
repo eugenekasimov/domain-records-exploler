@@ -1,10 +1,7 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { flushPromises } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { useDomainRecords } from '../src/composables/useDomainRecords'
 import * as api from '../src/api/domainApi'
-
-const DEBOUNCE_MS = 400
 
 const samplePage = {
   data: [
@@ -28,9 +25,6 @@ describe('useDomainRecords', () => {
     mockFetch.mockReset()
   })
 
-  afterEach(() => {
-    vi.useRealTimers()
-  })
 
   it('loads domains when load is called', async () => {
     mockFetch.mockResolvedValueOnce(samplePage)
@@ -68,8 +62,7 @@ describe('useDomainRecords', () => {
     expect(composable.error.value).toBeNull()
   })
 
-  it('filter change triggers load with debounce', async () => {
-    vi.useFakeTimers()
+  it('filter change triggers load immediately', async () => {
     mockFetch.mockResolvedValue(samplePage)
 
     const composable = useDomainRecords()
@@ -78,8 +71,6 @@ describe('useDomainRecords', () => {
     mockFetch.mockClear()
 
     composable.filters.value = { ...composable.filters.value, domain: 'test' }
-    await nextTick()
-    vi.advanceTimersByTime(DEBOUNCE_MS)
     await flushPromises()
 
     expect(mockFetch).toHaveBeenCalledWith(
@@ -87,25 +78,36 @@ describe('useDomainRecords', () => {
     )
   })
 
-  it('resetFilters clears filters and triggers single load', async () => {
-    vi.useFakeTimers()
+  it('resetFilters clears non-empty filters and triggers load immediately', async () => {
     mockFetch.mockResolvedValue(samplePage)
 
     const composable = useDomainRecords()
     await composable.reload()
     await flushPromises()
+
+    composable.filters.value = {
+      domain: 'example',
+      registrar: 'Acme',
+      status: 'active',
+    }
+    await flushPromises()
+    expect(composable.filters.value.domain).toBe('example')
     mockFetch.mockClear()
 
     composable.resetFilters()
-    await nextTick()
-    vi.advanceTimersByTime(DEBOUNCE_MS)
     await flushPromises()
 
     expect(composable.filters.value).toEqual({})
-    expect(mockFetch).toHaveBeenCalledWith(expect.objectContaining({ page: 1 }))
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.objectContaining({ page: 1 })
+    )
+    const lastCall = mockFetch.mock.calls[mockFetch.mock.calls.length - 1]?.[0]
+    expect(lastCall?.domain).toBeUndefined()
+    expect(lastCall?.registrar).toBeUndefined()
+    expect(lastCall?.status).toBeUndefined()
   })
 
-  it('pagination: setPage and goToNextPage call fetch with correct page', async () => {
+  it('pagination: goToNextPage calls fetch with correct page', async () => {
     mockFetch.mockResolvedValue({ data: [], total: 25 })
 
     const composable = useDomainRecords()
@@ -114,7 +116,7 @@ describe('useDomainRecords', () => {
     expect(composable.total.value).toBe(25)
     mockFetch.mockClear()
 
-    composable.setPage(2)
+    composable.goToNextPage()
     await flushPromises()
     expect(mockFetch).toHaveBeenCalledWith(
       expect.objectContaining({ page: 2, pageSize: 10 })
@@ -136,8 +138,11 @@ describe('useDomainRecords', () => {
     const composable = useDomainRecords()
     await composable.reload()
     await flushPromises()
-    composable.setPage(3)
+    composable.goToNextPage()
     await flushPromises()
+    composable.goToNextPage()
+    await flushPromises()
+    expect(composable.page.value).toBe(3)
     mockFetch.mockClear()
 
     composable.goToPreviousPage()

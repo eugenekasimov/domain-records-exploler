@@ -1,25 +1,38 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import DomainFilters from '../src/components/DomainFilters.vue'
 
+const FILTER_DEBOUNCE_MS = 400
+
 describe('DomainFilters', () => {
-  it('emits update:domain when domain input changes', async () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('emits update:domain when domain input changes (after debounce)', async () => {
     const wrapper = mount(DomainFilters, {
       props: { domain: '', registrar: '', status: '' },
     })
     const input = wrapper.find('input[name="domain"]')
     await input.setValue('example.com')
+    expect(wrapper.emitted('update:domain')).toBeFalsy()
+    await vi.advanceTimersByTime(FILTER_DEBOUNCE_MS)
     const emitted = wrapper.emitted('update:domain')
     expect(emitted).toBeTruthy()
     expect(emitted?.[emitted.length - 1]).toEqual(['example.com'])
   })
 
-  it('emits update:registrar when registrar input changes', async () => {
+  it('emits update:registrar when registrar input changes (after debounce)', async () => {
     const wrapper = mount(DomainFilters, {
       props: { domain: '', registrar: '', status: '' },
     })
     const input = wrapper.find('input[name="registrar"]')
     await input.setValue('Acme')
+    expect(wrapper.emitted('update:registrar')).toBeFalsy()
+    await vi.advanceTimersByTime(FILTER_DEBOUNCE_MS)
     const emitted = wrapper.emitted('update:registrar')
     expect(emitted).toBeTruthy()
     expect(emitted?.[emitted.length - 1]).toEqual(['Acme'])
