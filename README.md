@@ -15,9 +15,25 @@ npm install
 
 - **Run the dev server**:
 
-```bash
-npm run dev
-```
+  - **Prepare local env file**: copy the shared defaults into a local-only file so you can safely tweak failure modes:
+
+    ```bash
+    cp .env .env.local
+    ```
+
+  - **Simulate API failure modes**: edit `.env.local` and set `VITE_SIMULATE_API_ERROR` to one of:
+
+    ```bash
+    VITE_SIMULATE_API_ERROR=always  # mock API always throws
+    # or
+    VITE_SIMULATE_API_ERROR=random  # mock API randomly fails
+    ```
+
+  - **Start Vite dev server**:
+
+    ```bash
+    npm run dev
+    ```
 
 - **Run tests**:
 
